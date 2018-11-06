@@ -40,7 +40,7 @@ function displayMetrics(file) {
             name = name.grey;
         }
 
-        rows.push([ prefix + name, data.ecc, data.arity, data.codeLines, data.commentLines, Math.round(100 * data.commentLines / data.codeLines) ]);
+        rows.push([ prefix + name, data.ecc, data.arity, data.codeLines, data.commentLines, Math.round(100 * data.commentLines / data.codeLines) + '%' ]);
 
         // Add two spaces to the prefix before the next depth, to illustrate
         // the hierarchy in the table.
@@ -68,6 +68,13 @@ var opts = parser.parse();
 opts._.forEach(displayMetrics);
 
 // Display a table of metrics.
-
+console.log("==== ANALIZADOR DE METRICAS PARA JAVASCRIPT ====");
+console.log(`Valores:
+CC: Estimación de la complejidad ciclomática.
+Ar: Aridad de la función.
+Cd: Número de líneas de código, excluyendo espacios en blanco y comentarios.
+Cm: Número de líneas de comentarios.
+Cm/Cd: Relación de comentarios a código, como porcentaje.
+`);
 yatf(['Scope', 'CC', 'Ar', 'Cd', 'Cm', 'Cm/Cd'], rows, { underlineHeaders: true });
 
